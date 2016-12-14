@@ -1,0 +1,13 @@
+void do(int x)
+{
+	int a = 10;
+	x = x+a;
+	a = x-a;
+	x = x-a;
+
+	x = x+a;
+	a = x-a;
+	x = x-a;
+
+	return a;
+}

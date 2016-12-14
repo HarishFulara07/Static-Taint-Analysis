@@ -1,0 +1,23 @@
+int compute(int x,int y) {
+	int res=x*2;
+	int a=0;
+	while(y!=0) {
+		if(x>=0) {
+			a=y%2;
+			y=y/2;
+			x=x-1;
+		}
+		else {
+			a=10;
+			res=0;
+		}
+	}
+	if(x>0)
+	{
+		return a;
+	}
+	else
+	{
+		return res;
+	}
+}

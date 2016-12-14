@@ -1,0 +1,99 @@
+My code is divided into 3 packages : main, helper and test
+
+* 'main' package contains the main 'StaticTaintAnalyzer' class. Please run this class to run the static taint analysis program.
+
+* 'helper' package contains two classes which are used by the main 'StaticTaintAnalyzer' class.
+
+* 'test' package contains some test cases which are used by me to test my program. PLEASE PUT ALL YOUR TEST CASES IN THIS PACKAGE ONLY TO TEST MY PROGRAM.
+
+<-------------------------------------------------------------------------------------------------->
+
+Following are the assumptions made by me for my static taint analyzeer tool:
+
+1. A single statement can have only one int variable declared. For example, our program cannot have anything like 'int x = 2, y = 4' because two variables are getting declared in the same statement.
+
+2. Every variable will be declared in the function scope. No variable will be declared inside if-else or while. For example, the following code snippet is invalid because the variable 'a' is declared inside the if statement :
+
+int foo(int x) {
+	if(x > 0) {
+		int a = 10;
+		return a;
+	}
+	else {
+		return x;
+	}
+}
+
+A valid code snippet of the above function will be :
+
+int foo(int x) {
+	int a = 10;
+	if(x > 0) {
+		return a;
+	}
+	else {
+		return x;
+	}
+}
+
+3. All the statements inside if, else and while will be inside brackets. For example, the following code snippet is invalid because the statement inside the if statement is not inside brackets :
+
+int foo(int x, int y) {
+	int a = x;
+	if(x > 0)
+		return a;
+}
+
+A valid code snippet of the above function will be :
+
+int foo(int x, int y) {
+	int a = x;
+	if(x > 0) {
+		return a;
+	}
+}
+
+4. A closing bracket '}' will appear in a separate line. For example, the following code snippet is invalid because closing bracket '}' and else keyword appear in the same line :
+
+int foo(int x) {
+	if(x > 0) {
+		return 10;
+	} else {
+		return x;
+	}
+}
+
+A valid code snippet of the above function will be :
+
+int foo(int x) {
+	if(x > 0) {
+		return 10;
+	}
+	else {
+		return x;
+	}
+}
+
+5. The function will not return any of the function arguments. For example, the following code snippet is invalid because the function 'foo' returns one of the function arguments, i.e, 'x' :
+
+int foo(int x, int y) {
+	if(x > 0) {
+		return x;
+	}
+}
+
+A valid code snippet of the above program will be :
+
+int foo(int x, int y) {
+	int a = x;
+	if(x > 0) {
+		return a;
+	}
+}
+
+6. The function can contain 'if' or 'else' statements any number of times but cannot contain 'else if' statement.
+
+7. The function will not contain an if statement nested inside another if statement or nested inside an else statement. The function can contain an if/else statement inside a while loop or a while loop inside an if/else statement.
+
+8. The function will not contain any shorthand assignments like x++, x--, x+=1, x-=1, x*=2, etc.
+x++ will be written as x = x + 1, x-- will be written as x = x - 1, x+=1 will be written as x = x + 1, and so on.
